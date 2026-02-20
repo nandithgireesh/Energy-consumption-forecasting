@@ -1,0 +1,70 @@
+﻿============================================================
+  DAY 2 ΓÇö Preprocessing & Feature Engineering
+  Claysys AI Hackathon 2026
+============================================================
+
+≡ƒôé STEP 1: Loading raw dataset...
+   Γ£à Loaded 2,075,259 records | 2006-12-16 17:24:00 ΓåÆ 2010-11-26 21:02:00
+   Missing values: 181,853 (1.25%)
+
+≡ƒº╣ STEP 2: Handling missing values (linear interpolation)...
+   Γ£à Missing after interpolation: 0
+
+ΓÅ▒∩╕Å  STEP 3: Resampling 1-minute ΓåÆ Hourly averages...
+   Γ£à Hourly records: 34,589  |  Shape: (34589, 7)
+
+≡ƒöì STEP 4: Removing extreme outliers (Z-score > 4)...
+   Γ£à Removed 98 outliers | Remaining: 34,491
+
+ΓÜÖ∩╕Å  STEP 5: Adding domain-derived features...
+   Γ£à apparent_power, power_factor, sub_metering_remainder added
+
+≡ƒôà STEP 6: Adding time & cyclical features...
+   Γ£à 13 time features added (calendar + cyclical)
+
+ΓÅ¬ STEP 7: Adding lag features...
+   Γ£à 8 lag features added: [1, 2, 3, 6, 12, 24, 48, 168]
+
+≡ƒôè STEP 8: Adding rolling mean & std features...
+   Γ£à 12 rolling features added (mean + std for windows: [3, 6, 12, 24, 48, 168])
+
+   Final shape after dropping NaN rows: (34323, 45)
+   Total features: 45
+
+Γ£é∩╕Å  STEP 9: Train / Test split (hold out last 3 months)...
+   Train: 2006-12-23 18:00:00 ΓåÆ 2010-08-26 21:00:00 | 32,116 records
+   Test : 2010-08-26 22:00:00  ΓåÆ 2010-11-26 21:00:00  | 2,207 records
+
+≡ƒôÉ STEP 10: Normalizing features (MinMaxScaler fit on train)...
+   Γ£à Scaler saved: models/minmax_scaler.pkl
+
+≡ƒÆ╛ STEP 11: Saving processed datasets...
+   Γ£à Saved:
+      ΓåÆ data/processed/features_hourly.csv
+      ΓåÆ data/processed/train.csv
+      ΓåÆ data/processed/test.csv
+      ΓåÆ data/processed/train_scaled.csv
+      ΓåÆ data/processed/test_scaled.csv
+
+≡ƒôê STEP 12: Generating Day 2 visualizations...
+   Γ£à Saved: reports/figures/day2_outlier_removal.png
+   Γ£à Saved: reports/figures/day2_train_test_split.png
+   Γ£à Saved: reports/figures/day2_feature_correlation.png
+   Γ£à Saved: reports/figures/day2_rolling_features.png
+
+============================================================
+  Γ£à DAY 2 COMPLETE!
+============================================================
+  Raw records       : 2,075,259 (1-minute)
+  After resampling  : 34,491 (hourly)
+  After outliers    : 34,491
+  Train rows        : 32,116
+  Test  rows        : 2,207
+  Total features    : 45
+  Lag features      : 8
+  Rolling features  : 12
+  Time features     : 13
+  Figures saved     : 4
+============================================================
+
+≡ƒÜÇ Ready for Day 3: Baseline Statistical Models (ARIMA, Holt-Winters)
