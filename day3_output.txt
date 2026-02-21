@@ -1,0 +1,86 @@
+﻿============================================================
+  DAY 3 - Baseline Statistical Models
+  Claysys AI Hackathon 2026
+============================================================
+
+[STEP 1] Loading processed train/test data...
+   Train: 32,212 hourly records
+   Test : 2,208 hourly records
+   Target mean : 1.079 kW
+   Target std  : 0.878 kW
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 1] Naive Seasonal Baseline (24-hour repeat)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Concept: Predict tomorrow = same as yesterday (same hour)
+
+   [Naive Seasonal] Results:
+   MAE  : 0.6597 kW
+   RMSE : 0.9408 kW
+   MAPE : 51.86 %
+   R2   : -0.4824
+   Saved: reports/figures/day3_naive_predictions.png
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 2] Holt-Winters Triple Exponential Smoothing
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Concept: Weighted average of trend + seasonal + level
+  Fitting on last 4,000 hourly records for speed...
+  Running optimizer (this may take ~30 seconds)...
+
+   [Holt-Winters] Results:
+   MAE  : 0.9991 kW
+   RMSE : 1.2688 kW
+   MAPE : 88.63 %
+   R2   : -1.6958
+   Saved: reports/figures/day3_holtwinters_predictions.png
+
+   Fitted Parameters:
+   Alpha (level smoothing)  : 0.5245
+   Beta  (trend smoothing)  : 0.0000
+   Gamma (season smoothing) : 0.0432
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 3] ARIMA(p,d,q) - Auto-Regressive Integrated Moving Average
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Concept: Model autocorrelations in differenced series
+  Running auto_arima to find best (p,d,q)...
+  Using last 500 hourly records for AutoARIMA search...
+  Best ARIMA order: (1, 1, 1)
+  Forecasting 2208 steps ahead...
+
+   [ARIMA(1, 1, 1)] Results:
+   MAE  : 0.6718 kW
+   RMSE : 0.9293 kW
+   MAPE : 57.05 %
+   R2   : -0.4462
+   Saved: reports/figures/day3_arima_predictions.png
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[COMPARISON] Building model comparison table & charts
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  === BASELINE MODEL LEADERBOARD ===
+                   MAE    RMSE   MAPE      R2
+Model                                        
+ARIMA(1, 1, 1)  0.6718  0.9293  57.05 -0.4462
+Naive Seasonal  0.6597  0.9408  51.86 -0.4824
+Holt-Winters    0.9991  1.2688  88.63 -1.6958
+
+  Saved: reports/day3_baseline_results.csv
+  Saved: reports/figures/day3_model_comparison.png
+  Saved: reports/figures/day3_all_baselines.png
+  Saved: reports/figures/day3_acf_pacf.png
+
+============================================================
+  DAY 3 COMPLETE!
+============================================================
+  Models trained   : 3 (Naive, Holt-Winters, ARIMA)
+  Best model       : ARIMA(1, 1, 1)
+  Best RMSE        : 0.9293 kW
+  Improvement over Naive: 1.2%
+  Figures saved    : 5
+============================================================
+
+Ready for Day 4: Classical ML Models (Random Forest, XGBoost, LightGBM)
+These should significantly outperform today's baselines!
