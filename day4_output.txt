@@ -1,0 +1,113 @@
+﻿============================================================
+  DAY 4 - Classical ML Models
+  Claysys AI Hackathon 2026
+============================================================
+
+[STEP 1] Loading processed feature data...
+   Train features : (32116, 43)
+   Test  features : (2207, 43)
+   Feature count  : 43
+   Features used  : ['Global_reactive_power', 'Voltage', 'Global_intensity', 'Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3', 'apparent_power', 'power_factor'] ...
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 1] Random Forest Regressor
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Concept: Ensemble of 200 decision trees ΓÇö each trained on
+  a random subset of data & features, then averaged.
+  Training Random Forest (200 trees)...
+  OOB Score (internal validation): 0.9977
+
+   [Random Forest]
+   MAE  : 0.0157 kW
+   RMSE : 0.0343 kW
+   MAPE : 1.46 %
+   R2   : 0.9980
+   Saved: reports/figures/day4_rf_predictions.png
+   Saved: reports/figures/day4_rf_feature_importance.png
+
+   Top 5 important features:
+   apparent_power                            0.2919
+   Global_intensity                          0.2121
+   power_factor                              0.1102
+   Sub_metering_3                            0.0859
+   sub_metering_remainder                    0.0778
+   Model saved: models/random_forest.pkl
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 2] XGBoost Regressor
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Concept: Gradient boosting ΓÇö sequentially builds trees,
+  each correcting errors of the previous one.
+  Training XGBoost (up to 1000 rounds, early stopping at 50)...
+  Best iteration: 180
+
+   [XGBoost]
+   MAE  : 0.0109 kW
+   RMSE : 0.0157 kW
+   MAPE : 1.14 %
+   R2   : 0.9996
+   Saved: reports/figures/day4_xgb_predictions.png
+   Model saved: models/xgboost.pkl
+
+   Top 5 XGBoost features:
+   Global_intensity                          0.4306
+   apparent_power                            0.1833
+   power_factor                              0.1226
+   Global_active_power_lag_1                 0.1194
+   sub_metering_remainder                    0.0422
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 3] LightGBM Regressor
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Concept: Gradient boosting with leaf-wise tree growth
+  (faster than XGBoost, often similar accuracy)
+  Training LightGBM (up to 1000 rounds, early stopping at 50)...
+  Best iteration: 987
+
+   [LightGBM]
+   MAE  : 0.0043 kW
+   RMSE : 0.0077 kW
+   MAPE : 0.42 %
+   R2   : 0.9999
+   Saved: reports/figures/day4_lgbm_predictions.png
+   Model saved: models/lightgbm.pkl
+
+   Top 5 LightGBM features:
+   apparent_power                            5997.0000
+   Global_intensity                          5116.0000
+   power_factor                              3572.0000
+   sub_metering_remainder                    3305.0000
+   Voltage                                   2600.0000
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[COMPARISON] Building full leaderboard vs Day 3 baselines
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  === FULL LEADERBOARD (Day 3 + Day 4) ===
+                   MAE    RMSE   MAPE      R2
+Model                                        
+LightGBM        0.0043  0.0077   0.42  0.9999
+XGBoost         0.0109  0.0157   1.14  0.9996
+Random Forest   0.0157  0.0343   1.46  0.9980
+ARIMA(1, 1, 1)  0.6718  0.9293  57.05 -0.4462
+Naive Seasonal  0.6597  0.9408  51.86 -0.4824
+Holt-Winters    0.9991  1.2688  88.63 -1.6958
+
+  Saved: reports/day4_all_results.csv
+  Saved: reports/figures/day4_full_leaderboard.png
+  Saved: reports/figures/day4_ml_comparison_week.png
+  Saved: reports/figures/day4_feature_importance_all.png
+
+============================================================
+  DAY 4 COMPLETE!
+============================================================
+  Models trained   : 3 (RF, XGBoost, LightGBM)
+  Best ML model    : LightGBM
+  Best RMSE        : 0.0077 kW
+  Improvement vs Naive baseline : 99.2%
+  Improvement vs ARIMA baseline : 99.2%
+  Figures saved    : 6
+============================================================
+
+Ready for Day 5: Deep Learning ΓÇö LSTM & GRU (PyTorch)
+Target to beat: RMSE < 0.0077 kW
