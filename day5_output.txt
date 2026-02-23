@@ -1,0 +1,145 @@
+﻿============================================================
+  DAY 5 - Deep Learning: LSTM & GRU
+  Claysys AI Hackathon 2026
+============================================================
+
+  Device : cuda
+  GPU    : NVIDIA GeForce GTX 1650 Ti
+  VRAM   : 4.3 GB
+
+[STEP 1] Loading & preparing sequence data...
+   Features in sequence : 14  ['Global_active_power', 'Global_reactive_power', 'Voltage', 'Global_intensity', 'Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3', 'hour_sin', 'hour_cos', 'month_sin', 'month_cos', 'dow_sin', 'dow_cos', 'is_weekend']
+   Sequence length      : 24 hours
+   X_train shape        : (28883, 24, 14)
+   X_val   shape        : (3209, 24, 14)
+   X_test  shape        : (2183, 24, 14)
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 1] LSTM ΓÇö Long Short-Term Memory
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Architecture : 2-layer LSTM ΓåÆ Dropout ΓåÆ FC(128ΓåÆ64ΓåÆ1)
+  Hidden size  : 128   |  Layers: 2   |  Dropout: 0.2
+  Features in  : 14   |  Seq length: 24 hours
+  Trainable params: 214,145
+
+  Training LSTM...
+  Epoch |  Train Loss |   Val Loss |         LR
+  ----- | ----------- | ---------- | ----------
+      1 |    0.025022 |   0.010401 |   1.00e-03
+      5 |    0.014992 |   0.009020 |   1.00e-03
+     10 |    0.014251 |   0.009508 |   1.00e-03
+     15 |    0.013985 |   0.008867 |   5.00e-04
+     20 |    0.013839 |   0.008848 |   5.00e-04
+     25 |    0.013538 |   0.008893 |   2.50e-04
+
+  Early stopping at epoch 27 (val loss no improvement for 10 epochs)
+  Best val loss: 0.008790
+
+   [LSTM]
+   MAE  : 0.3471 kW
+   RMSE : 0.4901 kW
+   MAPE : 40.99 %
+   R2   : 0.5956
+   Saved: reports/figures/day5_lstm_history.png
+   Saved: reports/figures/day5_lstm_predictions.png
+   Model saved: models/lstm_model.pt
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 2] GRU ΓÇö Gated Recurrent Unit
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Architecture : 2-layer GRU ΓåÆ Dropout ΓåÆ FC(128ΓåÆ64ΓåÆ1)
+  (Fewer parameters than LSTM ΓÇö often trains faster)
+  Trainable params: 162,689
+
+  Training GRU...
+  Epoch |  Train Loss |   Val Loss |         LR
+  ----- | ----------- | ---------- | ----------
+      1 |    0.025263 |   0.010782 |   1.00e-03
+      5 |    0.015328 |   0.009344 |   1.00e-03
+     10 |    0.014580 |   0.009018 |   1.00e-03
+     15 |    0.014201 |   0.009128 |   1.00e-03
+     20 |    0.014017 |   0.008912 |   1.00e-03
+     25 |    0.013892 |   0.008877 |   1.00e-03
+     30 |    0.013458 |   0.008777 |   5.00e-04
+     35 |    0.013506 |   0.008707 |   5.00e-04
+     40 |    0.013471 |   0.008587 |   5.00e-04
+     45 |    0.013304 |   0.008668 |   5.00e-04
+     50 |    0.013240 |   0.008684 |   2.50e-04
+     55 |    0.013181 |   0.008710 |   1.25e-04
+     60 |    0.013047 |   0.008539 |   1.25e-04
+  Best val loss: 0.008497
+
+   [GRU]
+   MAE  : 0.3350 kW
+   RMSE : 0.4808 kW
+   MAPE : 39.20 %
+   R2   : 0.6108
+   Saved: reports/figures/day5_gru_history.png
+   Saved: reports/figures/day5_gru_predictions.png
+   Model saved: models/gru_model.pt
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[MODEL 3] Bidirectional LSTM (Bonus)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Reads sequences forward AND backward ΓÇö richer context
+  Trainable params: 148,609
+
+  Training BiLSTM...
+  Epoch |  Train Loss |   Val Loss |         LR
+  ----- | ----------- | ---------- | ----------
+      1 |    0.026253 |   0.010610 |   1.00e-03
+      5 |    0.015050 |   0.009313 |   1.00e-03
+     10 |    0.014242 |   0.009455 |   1.00e-03
+     15 |    0.013980 |   0.008970 |   1.00e-03
+     20 |    0.013543 |   0.008651 |   5.00e-04
+     25 |    0.013461 |   0.008746 |   5.00e-04
+     30 |    0.013215 |   0.008795 |   2.50e-04
+
+  Early stopping at epoch 30 (val loss no improvement for 10 epochs)
+  Best val loss: 0.008651
+
+   [BiLSTM]
+   MAE  : 0.3446 kW
+   RMSE : 0.4905 kW
+   MAPE : 39.92 %
+   R2   : 0.5948
+   Saved: reports/figures/day5_bilstm_history.png
+   Saved: reports/figures/day5_bilstm_predictions.png
+   Model saved: models/bilstm_model.pt
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+[COMPARISON] Full leaderboard ΓÇö Days 3 + 4 + 5
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  === FULL LEADERBOARD (Day 3 + 4 + 5) ===
+                   MAE    RMSE   MAPE      R2
+Model                                        
+LightGBM        0.0043  0.0077   0.42  0.9999
+XGBoost         0.0109  0.0157   1.14  0.9996
+Random Forest   0.0157  0.0343   1.46  0.9980
+GRU             0.3350  0.4808  39.20  0.6108
+LSTM            0.3471  0.4901  40.99  0.5956
+BiLSTM          0.3446  0.4905  39.92  0.5948
+ARIMA(1, 1, 1)  0.6718  0.9293  57.05 -0.4462
+Naive Seasonal  0.6597  0.9408  51.86 -0.4824
+Holt-Winters    0.9991  1.2688  88.63 -1.6958
+
+  Saved: reports/day5_all_results.csv
+  Saved: reports/figures/day5_training_curves.png
+  Saved: reports/figures/day5_dl_comparison_week.png
+  Saved: reports/figures/day5_full_leaderboard.png
+
+============================================================
+  DAY 5 COMPLETE!
+============================================================
+  DL models trained  : LSTM, GRU, BiLSTM
+  Best DL model      : GRU
+  Best DL RMSE       : 0.4808 kW
+  LightGBM RMSE (D4) : 0.0077 kW
+  ML still leads ΓÇö DL is 6144.2% above LightGBM
+  (Classic result: tree models often beat LSTM on tabular data)
+  Figures saved      : 8
+============================================================
+
+Ready for Day 6: Prophet + Ensemble Stacking!
+The ensemble will combine the best of all worlds.
