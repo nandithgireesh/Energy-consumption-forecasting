@@ -172,18 +172,19 @@ Run the full project pipeline on Google Colab (no local setup required):
 
 ## 📈 Results Summary
 
-> *(To be updated daily as models are trained)*
+> *Final Evaluation on Aug-Nov 2010 Test Set (Prediction Horizon: 2,208 hours)*
 
-| Model | MAE | RMSE | MAPE | R² |
-|-------|-----|------|------|-----|
-| Naive Baseline | — | — | — | — |
-| Holt-Winters | — | — | — | — |
-| ARIMA | — | — | — | — |
-| Random Forest | — | — | — | — |
-| XGBoost | — | — | — | — |
-| LSTM | — | — | — | — |
-| Prophet | — | — | — | — |
-| **Ensemble** | **—** | **—** | **—** | **—** |
+| Rank | Model | MAE (kW) | RMSE (kW) | MAPE (%) | R² Score |
+|------|-------|----------|-----------|----------|----------|
+| 🥇 1 | **LightGBM** | **0.0043** | **0.0077** | **0.42** | **0.9999** |
+| 🥈 2 | Ensemble-Optimal | 0.0049 | 0.0081 | 0.49 | 0.9999 |
+| 🥉 3 | XGBoost | 0.0109 | 0.0157 | 1.14 | 0.9996 |
+| 4 | Random Forest | 0.0157 | 0.0343 | 1.46 | 0.9980 |
+| 5 | GRU (PyTorch) | 0.3350 | 0.4808 | 39.20 | 0.6108 |
+
+**🏆 Champion:** LightGBM achieved a massive **99.2% improvement** over the baseline Naive model.
+
+![Final Leaderboard](reports/figures/day6_final_leaderboard.png)
 
 ---
 
@@ -211,30 +212,43 @@ Run the full project pipeline on Google Colab (no local setup required):
 - ✅ Created initial visualizations: time series plots, distribution analysis
 
 ### Day 2 — Feb 20, 2026 — Preprocessing & Feature Engineering  
-*(To be updated)*
+- ✅ Resampled 2M+ minute records to 34,491 hourly records
+- ✅ Handled missing values (linear interpolation) and outliers (Z-score trimming)
+- ✅ Engineered 45 features: Domain (Apparent Power, Power Factor), Time (cyclic), Lags, and Rolling Stats
 
 ### Day 3 — Feb 21, 2026 — Baseline Statistical Models  
-*(To be updated)*
+- ✅ Set up train/test split (Aug-Nov 2010 held out)
+- ✅ Implemented Naive Seasonal baseline
+- ✅ Trained Holt-Winters and auto-ARIMA(1,1,1)
+- ✅ ARIMA performed best among baselines (RMSE 0.9293 kW)
 
 ### Day 4 — Feb 22, 2026 — Classical ML Models  
-*(To be updated)*
+- ✅ Trained Random Forest, XGBoost, and LightGBM
+- ✅ LightGBM emerged as champion (RMSE 0.0077 kW)
+- ✅ Feature importance analysis confirmed Apparent Power and Power Factor as dominant predictors
 
 ### Day 5 — Feb 23, 2026 — Deep Learning (LSTM/GRU)  
-*(To be updated)*
+- ✅ Prepared 24-hour multivariate sliding windows
+- ✅ Trained PyTorch LSTM, GRU, and Bidirectional LSTM on GPU
+- ✅ GRU performed best among DL models (RMSE 0.4808 kW)
 
 ### Day 6 — Feb 24, 2026 — Prophet + Ensemble  
-*(To be updated)*
+- ✅ Decomposed trend/seasonality with Facebook Prophet
+- ✅ Built 3 ensemble variants (stacking best ML and DL predictions)
+- ✅ Finalized ultimate 12-model leaderboard
 
 ### Day 7 — Feb 25, 2026 — Final Report & Submission  
-*(To be updated)*
+- ✅ Generated comprehensive results dashboard
+- ✅ Updated repository documentation and README
+- ✅ Final code commit and push for hackathon submission
 
 ---
 
 ## 👤 Author
 
-**Your Name**  
+**Nandith Gireesh**  
 Claysys AI Hackathon 2026  
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/<your-username>)
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/nandithgireesh)
 
 ---
 
