@@ -133,11 +133,6 @@ jupyter lab
 
 ---
 
-## 📓 Google Colab
-
-Run the full project pipeline on Google Colab (no local setup required):
-
-> **[📎 Open in Google Colab](#)** ← *(link to be added)*
 
 ---
 
@@ -258,9 +253,3 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
-## 🔗 Submission Links
-
-- **GitHub Repository**: [This Repository](#)
-- **Google Colab Notebook**: *(link to be added)*
-- **YouTube Demo Video**: *(To be uploaded — unlisted link)*
-- **Submission Form**: [https://forms.office.com/r/yjUQQ8fFa9](https://forms.office.com/r/yjUQQ8fFa9)
