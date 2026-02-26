@@ -27,7 +27,7 @@ st.sidebar.markdown("---")
 st.sidebar.write("**Deployed Models:**")
 model_choice = st.sidebar.radio(
     "Select Model to View:",
-    ("LightGBM (Champion 🏆)", "XGBoost", "Random Forest")
+    ("LightGBM (Champion 🏆)", "XGBoost")
 )
 
 st.sidebar.markdown("---")
@@ -57,7 +57,6 @@ def load_models():
     try:
         models['LightGBM (Champion 🏆)'] = (joblib.load(MODELS_DIR / 'lightgbm.pkl'), 'LightGBM')
         models['XGBoost'] = (joblib.load(MODELS_DIR / 'xgboost.pkl'), 'XGBoost')
-        models['Random Forest'] = (joblib.load(MODELS_DIR / 'random_forest.pkl'), 'Random Forest')
     except Exception as e:
         st.error(f"Error loading models: {e}")
     return models
